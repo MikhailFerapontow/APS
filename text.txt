@@ -1,0 +1,13 @@
+тип планировщика:
+  плоский - все задачи имеют одинаковый приоритет (видимо Коликовой похуй и в работе Почернина
+  они имеют разный приоритет)
+
+Алгоритм планирования:
+  nonpreemtive - задача выполняется пока она не доходит до состояния waiting или не terminated.
+  Прерывания невозможны
+  RMA - 
+    The static priorities are assigned according to the cycle duration
+    of the job, so a shorter cycle duration results in a higher job priority.
+    Rate monotonic analysis is used in conjunction with those systems to provide
+    scheduling guarantees for a particular application.
+    https://en.wikipedia.org/wiki/Rate-monotonic_scheduling
