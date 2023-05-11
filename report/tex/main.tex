@@ -1,0 +1,30 @@
+\subsection{Управление ОС}
+
+\begin{description}
+  \item[StartOS(entry, priority, name)] -- Запуск ОС, инициализация основных элементов системы, активация начальной задачи.
+  \item[ShutdownOS()] -- Завершение работы ОС. 
+\end{description}
+
+\subsection{Управление задачами}
+
+\begin{description}
+  \item[ActivateTask(entry, priority, name)] -- Инициализация задачи в системе.
+  \item[TermitateTask()] -- Завершение задачи.
+  \item[Schedule(task, mask)] -- Постановка задачи в очередь.
+  \item[Dispatch()] -- Диспетчеризация задач, постановка на выполнение.
+\end{description}
+
+\subsection{Управление ресурсами}
+
+\begin{description}
+  \item[InitRes(name)] -- Инициализация ресурса в системе.
+  \item[PIP\_GetRes(res)] -- Захват ресурса выполняющейся задачей.
+  \item[PIP\_ReleaseRes(res)] -- Освобождение ресурса.
+\end{description}
+
+\subsection{Управление событиями}
+\begin{description}
+  \item[SetSysEvent(mask)] -- Установка системного события.
+  \item[GetSysEvent(mask)] -- Возвращает текущее состояние системной маски установленных событий.
+  \item[WaitSysEvent(mask)] -- Задача переводится в состояние ожидания.
+\end{description}

@@ -34,8 +34,8 @@ int main(void) {
     char name4[] = "Task8";
     //StartOS(Task1, Task1prior, name1);
     //StartOS(Task4, Task4prior, name2);
-    StartOS(Task6, Task6prior, name3);
-    // StartOS(Task8, Task8prior, name4);
+    //StartOS(Task6, Task6prior, name3);
+     StartOS(Task8, Task8prior, name4);
 
     ShutdownOS();
     return 0;
@@ -95,6 +95,41 @@ TASK(Task7) {
     printf("Task7\n");
     TerminateTask();
 }
+
+// Test 4. Full Functionality
+
+TASK(Task8) {
+    printf("\nStart Task8\n\n");
+    char name[] = "Task9";
+    ActivateTask(Task9, Task9prior, name);
+    WaitSysEvent(1);
+    printf("\nTask 8 finished\n\n");
+    TerminateTask();
+}
+
+TASK(Task9) {
+    printf("\nStart Task9\n\n");
+    PIP_GetRes(Res1);
+    char name1[] = "Task10";
+    ActivateTask(Task10, Task10prior, name1);
+    char name2[] = "Task8";
+    SetSysEvent(1);
+    WaitSysEvent(2);
+    PIP_ReleaseRes(Res1);
+    printf("\nTask 9 finished\n\n");
+    TerminateTask();
+}
+
+TASK(Task10) {
+    printf("\nStart Task10\n\n");
+    PIP_GetRes(Res1);
+    char name[] = "Task9";
+    SetSysEvent(2);
+    PIP_ReleaseRes(Res1);
+    printf("\nTask 10 finished\n\n");
+    TerminateTask();
+}
+
 
 // TASK(Task6) {
 //     printf("\nThis is Task6!\n\n");

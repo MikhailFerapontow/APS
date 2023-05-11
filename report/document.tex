@@ -1,0 +1,80 @@
+\documentclass[12pt, a4paper]{article}
+
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, russian]{babel}
+\usepackage{amsmath, amsfonts, amsthm}
+\usepackage{listings}
+\usepackage{enumerate}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{nameref}
+\usepackage{hyperref}
+\usepackage{tabularx}
+\usepackage{indentfirst}
+\usepackage{booktabs}
+\usepackage{subcaption}
+\usepackage{parskip}
+
+\usepackage[newfloat]{minted}
+
+\setminted{
+  frame=lines,
+  framesep=2mm,
+  baselinestretch=1.2,
+  fontsize=\footnotesize,
+  linenos
+}
+
+\usepackage[top=3cm,bottom=3cm,left=2.5cm,right=2.5cm]{geometry}
+\pagenumbering{arabic}
+
+\begin{document}
+
+\include{titlepage.tex}
+
+\tableofcontents
+\newpage
+
+\section{Постановка задачи}
+
+\textbf{Индвидуальное задание №4} \\
+Необходимо реализовать модель операционной системы реального времени обладающей следующими свойствами:
+
+\noindent
+\textbf{Тип планировщика:} плоский
+
+\noindent
+\textbf{Алгоритм планирования:} nonpreemptive, RMA
+
+\noindent
+\textbf{Управление ресурсами:} PIP
+
+\noindent
+\textbf{Управление событиями:} системные события
+
+\noindent
+\textbf{Обработка прерываний:} нет
+
+\noindent
+\textbf{Максимальное количество задач:} 32
+
+\noindent
+\textbf{Максимальное количество ресурсов:} 16
+
+\noindent
+\textbf{Максимальное количество событий:} 16
+
+\noindent
+Кроме того, в задание входит написание тестов проверяющих соответствие проекта этим свойствам.
+\newpage
+
+\section{Пояснения к варианту}
+\input{tex/var.tex}
+\newpage
+
+\section{Описание структуры проекта}
+\input{tex/main.tex}
+
+
+\end{document}
