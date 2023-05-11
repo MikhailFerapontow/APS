@@ -1,0 +1,33 @@
+StartOS!
+[ActivateTask] Task4
+End of Activate Task4
+[Schedule] Task4
+End of Schedule Task4
+Task4 started
+
+This is Task4!
+
+GetResource Res1
+Resource Res1 captured by Task4
+[ActivateTask] Task5
+End of Activate Task5
+[Schedule] Task5
+End of Schedule Task5
+Task4 is running
+Release resource Res1
+Resource Res1 released by Task4
+Task4 is running
+[Terminate Task] Task4
+End of Terminate Task Task4
+Task5 started
+
+This is Task5!
+
+GetResource Res1
+Resource Res1 captured by Task5
+Release resource Res1
+Resource Res1 released by Task5
+Task5 is running
+[Terminate Task] Task5
+End of Terminate Task Task5
+ShutdownOS!

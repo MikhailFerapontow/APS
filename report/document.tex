@@ -75,6 +75,21 @@
 
 \section{Описание структуры проекта}
 \input{tex/main.tex}
+\newpage
 
+\section{Тестирование}
+\input{tex/test.tex}
+\newpage
+
+\section*{Код Программы}
+\addcontentsline{toc}{section}{\protect\numberline{}Код программы}%
+\inputminted[label=global.cpp]{c++}{../global.cpp}
+\inputminted[label=defs.h]{c++}{../defs.h}
+\inputminted[label=rtos\_api.h]{c++}{../rtos_api.h}
+\inputminted[label=sys.h]{c++}{../sys.h}
+\inputminted[label=events.cpp]{c++}{../events.cpp}
+\inputminted[label=resource.cpp]{c++}{../resource.cpp}
+\inputminted[label=task.cpp]{c++}{../task.cpp}
+\inputminted[label=test.cpp]{c++}{../test.cpp}
 
 \end{document}

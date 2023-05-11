@@ -1,0 +1,34 @@
+StartOS!
+[ActivateTask] Task1
+End of Activate Task1
+[Schedule] Task1
+End of Schedule Task1
+Task1 started
+
+This is Task1!
+
+[ActivateTask] Task2
+End of Activate Task2
+[Schedule] Task2
+End of Schedule Task2
+Task1 is running
+[ActivateTask] Task3
+End of Activate Task3
+[Schedule] Task3
+End of Schedule Task3
+Task1 is running
+[Terminate Task] Task1
+End of Terminate Task Task1
+Task3 started
+
+This is Task3!
+
+[Terminate Task] Task3
+End of Terminate Task Task3
+Task2 started
+
+This is Task2!
+
+[Terminate Task] Task2
+End of Terminate Task Task2
+ShutdownOS!

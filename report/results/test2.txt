@@ -1,0 +1,34 @@
+StartOS!
+[ActivateTask] Task6
+End of Activate Task6
+[Schedule] Task6
+End of Schedule Task6
+Task6 started
+
+This is Task6!
+
+[ActivateTask] Task7
+End of Activate Task7
+[Schedule] Task7
+End of Schedule Task7
+Task6 is running
+WaitSysEvent 1
+Task7 started
+
+This is Task7!
+
+SetSysEvent 1
+Task "Task6" is ready
+Task7 is running
+End of SetSysEvent 1
+Task7
+[Terminate Task] Task7
+End of Terminate Task Task7
+Task6 started
+Task6 is running
+End of WaitSysEvent 1
+GetEvent=0
+Task6
+[Terminate Task] Task6
+End of Terminate Task Task6
+ShutdownOS!

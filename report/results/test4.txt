@@ -1,0 +1,71 @@
+StartOS!
+[ActivateTask] Task8
+End of Activate Task8
+[Schedule] Task8
+End of Schedule Task8
+Task8 started
+
+Start Task8
+
+[ActivateTask] Task9
+End of Activate Task9
+[Schedule] Task9
+End of Schedule Task9
+Task8 is running
+WaitSysEvent 1
+Task9 started
+
+Start Task9
+
+GetResource Res1
+Resource Res1 captured by Task9
+[ActivateTask] Task10
+End of Activate Task10
+[Schedule] Task10
+End of Schedule Task10
+Task9 is running
+SetSysEvent 1
+Task "Task8" is ready
+Task9 is running
+End of SetSysEvent 1
+WaitSysEvent 2
+Task10 started
+
+Start Task10
+
+GetResource Res1
+Resource Res1 captured by Task10
+SetSysEvent 2
+Task "Task9" is ready
+Task10 is running
+End of SetSysEvent 2
+Release resource Res1
+Resource Res1 released by Task10
+Task10 is running
+
+Task 10 finished
+
+[Terminate Task] Task10
+End of Terminate Task Task10
+Task9 started
+GetResource Res1
+Resource Res1 captured by Task9
+Task9 is running
+End of WaitSysEvent 2
+Release resource Res1
+Resource Res1 released by Task9
+Task9 is running
+
+Task 9 finished
+
+[Terminate Task] Task9
+End of Terminate Task Task9
+Task8 started
+Task8 is running
+End of WaitSysEvent 1
+
+Task 8 finished
+
+[Terminate Task] Task8
+End of Terminate Task Task8
+ShutdownOS!
