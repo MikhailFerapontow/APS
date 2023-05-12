@@ -41,7 +41,7 @@ int main(void) {
     return 0;
 }
 
-// Test 1. preemptive algorithm
+// Test 1. nonpreemptive algorithm
 TASK(Task1) {
     printf("\nThis is Task1!\n\n");
     char name[] = "Task2";
@@ -129,54 +129,3 @@ TASK(Task10) {
     printf("\nTask 10 finished\n\n");
     TerminateTask();
 }
-
-
-// TASK(Task6) {
-//     printf("\nThis is Task6!\n\n");
-//     char name[] = "Task7";
-//     ActivateTask(Task7, Task7prior, name);
-//     WaitEvent(Event1);
-//     printf("\nTask6 finished\n\n");
-//     TerminateTask();
-// }
-
-// TASK(Task7) {
-//     printf("\nThis is Task7!\n\n");
-//     char name[] = "Task6";
-//     SetEvent(name, Event1);
-//     printf("\nTask7 finished\n\n");
-//     TerminateTask();
-// }
-// // Test 4. All functionality
-// TASK(Task8) {
-//     printf("\nStart Task8\n\n");
-//     char name[] = "Task9";
-//     ActivateTask(Task9, Task9prior, name);
-//     WaitEvent(Event2);
-//     printf("\nTask 8 finished\n\n");
-//     TerminateTask();
-// }
-
-// TASK(Task9) {
-//     printf("\nStart Task9\n\n");
-//     PIP_GetRes(Res1);
-//     char name1[] = "Task10";
-//     ActivateTask(Task10, Task10prior, name1);
-//     char name2[] = "Task8";
-//     SetEvent(name2, Event2);
-//     WaitEvent(Event3);
-//     PIP_ReleaseRes(Res1);
-//     printf("\nTask 9 finished\n\n");
-//     TerminateTask();
-// }
-
-// TASK(Task10) {
-//     printf("\nStart Task10\n\n");
-//     PIP_GetRes(Res1);
-//     char name[] = "Task9";
-//     SetEvent(name, Event3);
-//     PIP_ReleaseRes(Res1);
-//     printf("\nTask 10 finished\n\n");
-//     TerminateTask();
-// }
-
