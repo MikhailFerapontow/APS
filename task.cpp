@@ -2,12 +2,11 @@
 #include "sys.h"
 #include "rtos_api.h"
 
-// Инициализация задачи в системе.
 void ActivateTask(TTaskCall entry, int priority, char *name) {
     printf("[ActivateTask] %s\n", name);
 
-    int occupy = FreeTask; // Получаем номер задачи в списке.
-    FreeTask = TaskQueue[occupy].ref; // Смещение первой свободной ячейки.
+    int occupy = FreeTask;
+    FreeTask = TaskQueue[occupy].ref;
 
     // Инициализируем поля задачи.
     TaskQueue[occupy].priority = priority;
@@ -20,41 +19,34 @@ void ActivateTask(TTaskCall entry, int priority, char *name) {
 
     printf("End of Activate %s\n", name);
 
-    Schedule(occupy); // Вызываем планировщик для этой задачи.
+    Schedule(occupy);
 }
 
-// Завершение задачи.
 void TerminateTask(void) {
-    int task = RunningTask; // Номер текущей выполняющейся задачи.
+    int task = RunningTask;
 
     printf("[Terminate Task] %s\n", TaskQueue[task].name);
-    TaskQueue[task].state = TASK_DONE; // Говорим, что задача выполнена.
-    RunningTask = _NULL; // Теперь ничего не выполняется.
+    TaskQueue[task].state = TASK_DONE;
+    RunningTask = _NULL;
 
     printf("End of Terminate Task %s\n", TaskQueue[task].name);
 
-    Dispatch(); // После завершения задачи возьмем следующую на выполнение.
+    Dispatch();
 }
 
-// Планировщик задач.
 void Schedule(int task, int mode) {
     printf("[Schedule] %s\n", TaskQueue[task].name);
 
-    int cur = HeadTask; // Текущая задача - самая первая в списке.
-    int prev = _NULL; // Предыдущей пока нет.
-    int priority = TaskQueue[task].priority; // Получаем приоритет текущей.
+    int cur = HeadTask;
+    int prev = _NULL;
+    int priority = TaskQueue[task].priority;
 
-    // Реализация preemptive алгоритма планирования.
-    // Проходимся по списку.
-    // Пока приортет задач в списке больше, чем приоритет нашей задачи...
+
     while (cur != _NULL && TaskQueue[cur].priority > priority) {
-        // Переходим к следующей задачи в списке.
         prev = cur;
         cur = TaskQueue[cur].ref;
     }
 
-    // Доходим до последней задачи в списке с таким же приоритетом,
-    // как и у нашей задачи.
     if (mode == INSERT_TO_TAIL) {
         while (cur != _NULL && TaskQueue[cur].priority == priority) {
             prev = cur;
@@ -62,59 +54,46 @@ void Schedule(int task, int mode) {
         }
     }
 
-    // Сейчас в cur у нас указатель первую задачу, у которой приоритет
-    // будет ниже, чем у новой задачи.
-
-    TaskQueue[task].ref = cur; // Новая задача будет указывать на следующую.
-    if (prev == _NULL) { HeadTask = task; } // Мы добавили первую задачу.
-    else TaskQueue[prev].ref = task; // А предыдущая задача указет на нову.
-    TaskQueue[task].state = TASK_READY; // Новая задача готова к выполнению.
+    TaskQueue[task].ref = cur;
+    if (prev == _NULL) { HeadTask = task; }
+    else TaskQueue[prev].ref = task;
+    TaskQueue[task].state = TASK_READY;
 
     printf("End of Schedule %s\n", TaskQueue[task].name);
 
-    Dispatch(); // Вызываем диспетчер.
+    Dispatch();
 }
 
-// Диспетчеризация задач, постановка на выполнение.
 void Dispatch() {
-    int task = HeadTask; // Указатель на голову списка задач.
-    // Проходимся по всему списку задач.
+    int task = HeadTask;
     while (task != _NULL) {
-        // В зависимости от состояния текущей задачи с высшим приоритетом...
         switch (TaskQueue[task].state) {
-            case TASK_DONE: // Если очередная задача уже выполнена...
-                // Просто переходим к следующей.
+            case TASK_DONE:
                 task = TaskQueue[task].ref;
                 continue;
-            case TASK_RUNNING: // Если очередная задача выполняется...
-                // Значит она продолжит выполняться.
+            case TASK_RUNNING:
                 printf("%s is running\n", TaskQueue[task].name);
                 return;
-            case TASK_READY: // Если очередная задача готова к выполнению...
-                if (RunningTask != _NULL) { // Если что-то выполняется...
+            case TASK_READY:
+                if (RunningTask != _NULL) {
                     task = TaskQueue[task].ref;
                     continue;
                 }
-                // Запускаем задачу на выполнени.
                 printf("%s started\n", TaskQueue[task].name);
                 RunningTask = task;
                 TaskQueue[task].state = TASK_RUNNING;
 
-                // Даем задаче ресурс.
                 if (TaskQueue[task].res != _NULL) {
                     PIP_GetRes(TaskQueue[task].res);
                 }
                 TaskQueue[task].switchNumber++;
-                // Если первый раз включили задачу...
                 if (TaskQueue[task].switchNumber == 1) {
-                    TaskQueue[task].entry(); // Просто начинаем выполнять.
-                } else { // Иначе...
-                    // Восстанавливаем контекст.
+                    TaskQueue[task].entry();
+                } else {
                     longjmp(TaskQueue[task].context, 1);
                 }
                 return;
             case TASK_WAITING:
-                // Если задача обладает всеми событиями, которые ожидает...
                 task = TaskQueue[task].ref;
                 continue;
          }

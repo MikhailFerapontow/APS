@@ -5,7 +5,7 @@ TResource ResourceQueue[MAX_RES];
 TResource EventQueue[MAX_EVENTS];
 
 int RunningTask;
-int FreeTask = 0; // Указатель на свободную ячейку.
-int HeadTask = 0; // Указатель на голову списка задач.
+int FreeTask = 0;
+int HeadTask = 0;
 int FreeResource = 0;
 TEventMask WorkingEvents;

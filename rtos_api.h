@@ -4,15 +4,12 @@
 
 #include "sys.h"
 
-// Макрос для объявления таски c ее приоритетом.
 #define DeclareTask(TaskID, priority)\
 TASK(TaskID); \
 enum {TaskID##prior=priority}
 
-// Макрос для объявления функции.
 #define TASK(TaskID) void TaskID(void)
 
-// Макрос для объявления события.
 #define DeclareEvent(task, EventID)\
 TEvent Event##EventID = TEvent(task, 1 << (EventID - 1));
 
@@ -43,4 +40,4 @@ void GetSysEvent(TEventMask* event);
 
 void WaitSysEvent(TEventMask mask);
 
-#endif //APS_OS_REALTIME_RTOS_API_H
+#endif

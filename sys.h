@@ -6,13 +6,11 @@
 #include <csetjmp>
 #include "string.h"
 
-// Режимы работы планировщика.
-#define INSERT_TO_TAIL 1 // Вставка в конец.
-#define INSERT_TO_HEAD 0 // Вставка в начало.
+#define INSERT_TO_TAIL 1
+#define INSERT_TO_HEAD 0
 
-#define _NULL -1 // Указатель в никуда.
+#define _NULL -1
 
-// Возможные состояния задачи.
 enum TTaskState {
     TASK_RUNNING,
     TASK_READY,
@@ -24,17 +22,16 @@ enum TTaskState {
 typedef int TEventMask;
 extern TEventMask WorkingEvents;
 
-// Задача.
 typedef struct Type_Task {
-    int ref; // Ссылка на следующую задачу.
-    int priority; // RMA планирование.
-    TTaskState state; // Состояние задачи.
+    int ref;
+    int priority;
+    TTaskState state;
     TEventMask waiting_events;
 
     int res;
-    unsigned int switchNumber = 0; // Количество переключений на эту задачу.
+    unsigned int switchNumber = 0;
 
-    void (*entry)(void); // Указатель на функцию.
+    void (*entry)(void);
 
     jmp_buf context;
     char *name;
@@ -48,7 +45,7 @@ typedef struct Type_resource {
 
 extern int HeadTask;
 
-extern TTask TaskQueue[MAX_TASK]; // Массив задач.
+extern TTask TaskQueue[MAX_TASK];
 typedef struct Event {
     Event(char *name, TEventMask mask) {
         this->task = name;
@@ -59,10 +56,9 @@ typedef struct Event {
     TEventMask mask;
 } TEvent;
 
-// Объявление глобальных переменных.
 extern TResource ResourceQueue[MAX_RES];
 extern TResource EventQueue[MAX_EVENTS];
-extern int RunningTask; // Номер текущей выполняющейся задачи.
+extern int RunningTask;
 extern int FreeTask;
 extern int FreeResource;
 
@@ -71,4 +67,4 @@ void Schedule(int task, int mode = INSERT_TO_TAIL);
 void Dispatch();
 
 
-#endif //APS_OS_REALTIME_SYS_H
+#endif
