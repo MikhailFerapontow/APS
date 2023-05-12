@@ -35,7 +35,7 @@ int main(void) {
     //StartOS(Task1, Task1prior, name1);
     //StartOS(Task4, Task4prior, name2);
     //StartOS(Task6, Task6prior, name3);
-    //StartOS(Task8, Task8prior, name4);
+    StartOS(Task8, Task8prior, name4);
 
     ShutdownOS();
     return 0;
@@ -76,6 +76,7 @@ TASK(Task5) {
     PIP_ReleaseRes(Res1);
     TerminateTask();
 }
+
 // Test 3. Tasks events
 TASK(Task6) {
     printf("\nThis is Task6!\n\n");
